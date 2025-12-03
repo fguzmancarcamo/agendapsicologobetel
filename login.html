@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso - Atención Psicólogo Betel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="login-body">
+
+    <div class="login-card">
+        <h2>🔒 Acceso Betel</h2>
+        <p style="margin-bottom: 20px; font-size: 0.9em; color: #ccc;">Sistema de control de atenciones psicológicas.</p>
+
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Usuario" required autocomplete="off">
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit" style="width: 100%;">Ingresar al Sistema</button>
+            <p id="error-message" class="error-msg">Usuario o contraseña incorrectos.</p>
+        </form>
+    </div>
+
+    <script>
+        const CREDENCIALES = { usr: 'monitor', pass: 'betel01020102' };
+        
+        // Verificar sesión al cargar
+        if (localStorage.getItem('casaBetelSesionActiva') === 'true') {
+            window.location.href = 'dashboard.html';
+        }
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const u = document.getElementById('username').value.trim();
+            const p = document.getElementById('password').value.trim();
+            const err = document.getElementById('error-message');
+
+            if (u === CREDENCIALES.usr && p === CREDENCIALES.pass) {
+                localStorage.setItem('casaBetelSesionActiva', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                err.style.display = 'block';
+                document.getElementById('password').value = '';
+            }
+        });
+    </script>
+</body>
+</html>

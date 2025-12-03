@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Dashboard - Atención Psicólogo Betel</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+
+    <header>
+        <h1>Atención Psicólogo Betel</h1>
+        <button id="logout-button" class="btn-logout">Cerrar Sesión</button>
+    </header>
+
+    <div class="container">
+
+        <div class="stats-panel">
+            <div class="stat-card">
+                <span class="stat-number" id="stat-pacientes">0</span>
+                <span class="stat-label">Pacientes Activos</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number" id="stat-atenciones">0</span>
+                <span class="stat-label">Total Atenciones</span>
+            </div>
+            <div class="stat-card" style="border-color: var(--color-warning);">
+                <span class="stat-number" id="stat-pendientes" style="color: var(--color-warning);">0</span>
+                <span class="stat-label">Alertas / Retrasos</span>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>👥 Nuevo Paciente</h2>
+            <form id="registro-paciente-form">
+                <label>Nombre Completo:</label>
+                <input type="text" id="nuevo-paciente-nombre" required placeholder="Ej: Fernando Rojas" autocomplete="off">
+                <button type="submit">Agregar Paciente</button>
+            </form>
+        </div>
+        
+        <div class="form-section">
+            <h2>➕ Registrar Atención</h2>
+            <form id="registro-atencion-form">
+                <label>Seleccionar Paciente:</label>
+                <select id="paciente-select" required>
+                    <option value="">-- Cargando --</option>
+                </select>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <label>Fecha:</label>
+                        <input type="date" id="fecha-atencion" required>
+                    </div>
+                    <div style="flex: 1;">
+                        <label>Hora:</label>
+                        <input type="time" id="hora-atencion" required>
+                    </div>
+                </div>
+                
+                <button type="submit" style="width: 100%;">Guardar Atención</button>
+            </form>
+        </div>
+        
+        <div class="list-section">
+            <h2>📅 Estado de Pacientes</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Última Atención</th>
+                            <th>Próxima Esperada</th>
+                            <th>Estado</th>
+                            <th>Acciones</th> 
+                        </tr>
+                    </thead>
+                    <tbody id="atenciones-listado">
+                        </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
